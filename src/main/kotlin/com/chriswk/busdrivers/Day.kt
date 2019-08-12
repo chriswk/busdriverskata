@@ -10,4 +10,5 @@ class Day(val routes: List<List<Int>>, val maxStep: Int = 480) {
         val s = generateSequence(Minute(drivers = gossipedAtStart)) { m -> m.nextMinute() }
         return s.dropWhile { !it.isAllGossipKnown() && it.currentMinute < maxStep }.first()
     }
+
 }

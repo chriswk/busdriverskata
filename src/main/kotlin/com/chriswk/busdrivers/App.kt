@@ -18,6 +18,9 @@ data class BusDriver(val currentIdx: Int = 0, val route: List<Int> = emptyList()
 
     private fun nextIdx(): Int = (currentIdx + 1) % route.size
 
+    fun meet(otherDriver: BusDriver): BusDriver {
+        return this.copy(gossip = gossip.union(otherDriver.gossip))
+    }
 }
 
 fun main(args: Array<String>) {

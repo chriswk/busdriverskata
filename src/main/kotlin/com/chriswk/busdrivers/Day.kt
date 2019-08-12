@@ -1,17 +1,13 @@
 package com.chriswk.busdrivers
 
 class Day(val routes: List<List<Int>>, val maxStep: Int = 480) {
-    var drivers = routes.mapIndexed { idx, route ->
+    val drivers = routes.mapIndexed { idx, route ->
         BusDriver(route = route, gossip = setOf(idx))
     }
 
-    init {
-        Gossiper.gossip(drivers)
-    }
-
     fun findStop(): Minute {
-        return (0..maxStep).fold(Minute(drivers = drivers)) { m, _ ->
-            if (m.isAllGossipKnown()) { m } else m.nextMinute()
-        }
+        val gossipedAtStart = Gossiper.gossip(drivers)
+        val s = generateSequence(Minute(drivers = gossipedAtStart)) { m -> m.nextMinute() }
+        return s.dropWhile { !it.isAllGossipKnown() && it.currentMinute < maxStep }.first()
     }
 }

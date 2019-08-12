@@ -26,6 +26,7 @@ class DayTest {
         val d = Day(routes = listOf(listOf(1, 2), listOf(3, 4)))
         val m = d.findStop()
         assertThat(m.isAllGossipKnown()).isFalse()
+        assertThat(m.currentMinute).isEqualTo(480)
     }
 
     @Test
@@ -33,7 +34,7 @@ class DayTest {
         val d = Day(routes = listOf(listOf(3,1,2,3), listOf(3,2,3,1), listOf(4,2,3,4,5)))
         val m = d.findStop()
         assertThat(m.isAllGossipKnown()).isTrue()
-        assertThat(m.currentMinute).isEqualTo(1)
+        assertThat(m.currentMinute).isEqualTo(4)
     }
 
     @Test

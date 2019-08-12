@@ -3,18 +3,16 @@ package com.chriswk.busdrivers
 object Gossiper {
 
     fun gossip(drivers: List<BusDriver>): List<BusDriver> {
-        drivers.groupBy { it.currentStop() }
-            .filterValues { it.size > 1 }
-            .forEach { (_, d) ->
-                val driver = d[0]
-                d.drop(1).forEach { otherDriver -> meet(driver, otherDriver) }
+        return drivers.map { d ->
+            drivers.filter { it.currentStop() == d.currentStop() && it != d }.fold(d) { updated, met ->
+                meet(updated, met)
             }
-        return drivers
+        }
     }
-    fun meet(driver: BusDriver, driver2: BusDriver) {
-        val newGossip = driver.gossip.union(driver2.gossip)
-        driver.gossip = newGossip
-        driver2.gossip = newGossip
+
+    fun meet(driver: BusDriver, met: BusDriver): BusDriver {
+        val newGossip = driver.gossip.union(met.gossip)
+        return driver.copy(gossip = newGossip)
     }
 
 }

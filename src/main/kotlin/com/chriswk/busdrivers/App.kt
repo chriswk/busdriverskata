@@ -6,7 +6,7 @@ package com.chriswk.busdrivers
 import java.io.File
 import java.nio.charset.Charset
 
-data class BusDriver(var currentIdx: Int = 0, val route: List<Int> = emptyList(), var gossip: Set<Int> = emptySet()) {
+data class BusDriver(val currentIdx: Int = 0, val route: List<Int> = emptyList(), val gossip: Set<Int> = emptySet()) {
 
     fun tick(): BusDriver {
         return this.copy(currentIdx = nextIdx())

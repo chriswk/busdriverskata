@@ -8,8 +8,6 @@ data class BusDriver(val currentIdx: Int = 0, val route: List<Int> = emptyList()
 
     fun currentStop() = route[currentIdx]
 
-    fun nextStop() = route[nextIdx()]
-
     private fun nextIdx(): Int = (currentIdx + 1) % route.size
 
     fun meet(otherDriver: BusDriver): BusDriver {

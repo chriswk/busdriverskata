@@ -9,13 +9,10 @@ class BusDriverTest {
     fun `steps should work`() {
         var busDriver = BusDriver(route = listOf(1, 4, 5))
         assertThat(busDriver.currentStop()).isEqualTo(1)
-        assertThat(busDriver.nextStop()).isEqualTo(4)
         busDriver = busDriver.tick()
         assertThat(busDriver.currentStop()).isEqualTo(4)
-        assertThat(busDriver.nextStop()).isEqualTo(5)
         busDriver = busDriver.tick()
         assertThat(busDriver.currentStop()).isEqualTo(5)
-        assertThat(busDriver.nextStop()).isEqualTo(1)
     }
 
     @Test
@@ -25,13 +22,12 @@ class BusDriverTest {
         var busDriver3 = BusDriver(gossip = setOf(3))
         busDriver = busDriver.meet(busDriver2)
         busDriver2 = busDriver2.meet(busDriver)
-        assertThat(busDriver.gossip).contains(1,2)
-        assertThat(busDriver2.gossip).contains(1,2)
+        assertThat(busDriver.gossip).contains(1, 2)
+        assertThat(busDriver2.gossip).contains(1, 2)
         busDriver = busDriver.meet(busDriver3)
         busDriver3 = busDriver3.meet(busDriver)
-        assertThat(busDriver.gossip).contains(1,2,3)
-        assertThat(busDriver2.gossip).contains(1,2)
-        assertThat(busDriver3.gossip).contains(1,2,3)
-
+        assertThat(busDriver.gossip).contains(1, 2, 3)
+        assertThat(busDriver2.gossip).contains(1, 2)
+        assertThat(busDriver3.gossip).contains(1, 2, 3)
     }
 }

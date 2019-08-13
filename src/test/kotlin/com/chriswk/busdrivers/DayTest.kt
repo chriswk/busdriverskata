@@ -31,7 +31,7 @@ class DayTest {
 
     @Test
     fun `Example 1 from kata`() {
-        val d = Day(routes = listOf(listOf(3,1,2,3), listOf(3,2,3,1), listOf(4,2,3,4,5)))
+        val d = Day(routes = listOf(listOf(3, 1, 2, 3), listOf(3, 2, 3, 1), listOf(4, 2, 3, 4, 5)))
         val m = d.findStop()
         assertThat(m.isAllGossipKnown()).isTrue()
         assertThat(m.currentMinute).isEqualTo(4)
@@ -39,17 +39,16 @@ class DayTest {
 
     @Test
     fun `Example 2 from kata`() {
-        val d = Day(routes = listOf(listOf(2,1,2), listOf(5,2,8)))
+        val d = Day(routes = listOf(listOf(2, 1, 2), listOf(5, 2, 8)))
         val m = d.findStop()
         assertThat(m.isAllGossipKnown()).isFalse()
     }
 
     @Test
     fun `Found after a long loop`() {
-        val d = Day(routes = listOf(listOf(1,2,3), listOf(4,5,6,7,8,9,3)))
+        val d = Day(routes = listOf(listOf(1, 2, 3), listOf(4, 5, 6, 7, 8, 9, 3)))
         val m = d.findStop()
         assertThat(m.isAllGossipKnown()).isTrue()
         assertThat(m.currentMinute).isEqualTo(20)
     }
-
 }
